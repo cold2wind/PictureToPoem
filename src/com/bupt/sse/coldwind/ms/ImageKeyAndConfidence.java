@@ -11,6 +11,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
+import com.bupt.sse.coldwind.convert.ParseKeyAndConfidence;
+
 /**
  * 微软提供的服务，分析图片，提取关键词并获取相应的自信度
  * 
@@ -42,24 +44,17 @@ public class ImageKeyAndConfidence {
             HttpResponse response = httpclient.execute(request);
             HttpEntity entity = response.getEntity();
 
-            return entity == null ? null : EntityUtils.toString(entity); 
+            if(entity != null) {
+            	String json = EntityUtils.toString(entity);
+            	//json : {"tags":[{"name":"water","confidence":0.99941468238830566},{"name":"person","confidence":0.93677496910095215},{"name":"sport","confidence":0.84868776798248291},{"name":"swimming","confidence":0.84544718265533447,"hint":"sport"},{"name":"water sport","confidence":0.82753580808639526,"hint":"sport"},{"name":"pool","confidence":0.80549460649490356}],
+            	//"requestId":"238bd65d-5aa5-4726-b1ec-8bb7791c542b","metadata":{"width":400,"height":400,"format":"Jpeg"}}
+            	return new ParseKeyAndConfidence().getPoem(json);
+            } else {
+            	return null;
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
         }
-    }
-    
-    public static void main(String[] mh) {
-    	String url = "https://portalstoragewuprod.blob.core.chinacloudapi.cn/vision/Analysis/1-1.jpg";
-    	System.out.println(getKeyAndConfidence(url));
-    }
-    
-    /**
-     * 
-     * @param res 微软返回的json格式的结果
-     * @return
-     */
-    public static String convertJsonToBean(String res) {
-    	return null;
     }
 }

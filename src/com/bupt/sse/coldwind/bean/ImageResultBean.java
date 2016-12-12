@@ -1,11 +1,14 @@
 package com.bupt.sse.coldwind.bean;
 
 import java.util.List;
-
+/**
+ * 由微软提供的服务返回的结果
+ * 
+ * @author Administrator
+ *
+ */
 public class ImageResultBean {
-	/*
-	 * 由微软提供的服务返回的结果
-	 */
+	
 	private List<ImageKeyBean> tags;
 
 	public List<ImageKeyBean> getTags() {

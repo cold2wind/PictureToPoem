@@ -11,7 +11,7 @@ import java.util.List;
 public class BaiduTransResultBean {
 	private String from;
 	private String to;
-	private List<BaiduEnToZnBean> transResult;
+	private List<BaiduEnToZnBean> trans_result;
 
 	public String getFrom() {
 		return from;
@@ -29,11 +29,11 @@ public class BaiduTransResultBean {
 		this.to = to;
 	}
 
-	public List<BaiduEnToZnBean> getTransResult() {
-		return transResult;
+	public List<BaiduEnToZnBean> getTrans_result() {
+		return trans_result;
 	}
 
-	public void setTransResult(List<BaiduEnToZnBean> transResult) {
-		this.transResult = transResult;
+	public void setTrans_result(List<BaiduEnToZnBean> trans_result) {
+		this.trans_result = trans_result;
 	}
 }

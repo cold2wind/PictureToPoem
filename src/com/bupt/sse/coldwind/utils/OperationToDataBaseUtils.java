@@ -7,12 +7,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.bupt.sse.coldwind.bean.PoemBean;
-import com.bupt.sse.coldwind.constant.Constatnt;
+import com.bupt.sse.coldwind.constant.Constant;
 
 public class OperationToDataBaseUtils {
 
     public static Map<String, PoemBean> getDataFromDataBase() {
-        File file = new File(Constatnt.PATH_DATABASE);
+        File file = new File(Constant.PATH_DATABASE);
         if (!file.exists()) {
             return null;
         }

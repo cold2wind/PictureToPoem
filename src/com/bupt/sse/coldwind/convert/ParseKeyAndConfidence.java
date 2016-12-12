@@ -15,8 +15,11 @@ import com.bupt.sse.coldwind.utils.OperationToDataBaseUtils;
 import com.google.gson.Gson;
 
 /**
- * 主要功能
- * 	1.将微软返回的json结果(name : confidence) 转换成 ImageResultBean
+ * 主要功能 :返回诗句结果
+ * 	1.将微软返回的json结果(name : confidence) 转换成 ImageResultBean，并保存到map(enTags)
+ * 	2.ImageResultBean英文的键通过百度翻译API转换成中文的BaiduTransResultBean并保存到map(zhTags)
+ * 	3.读入数据库
+ *  4.将zhTags与数据库进行匹配，返回诗句
  * 
  * @author Administrator
  *
@@ -97,19 +100,19 @@ public class ParseKeyAndConfidence {
 	 * @param json
 	 * @return
 	 */
-	private String translateCi(String json) {
-		String result = TranslateEnglishToChinese.translateWord(json);
+	private String translateCi(String english) {
+		String result = TranslateEnglishToChinese.translateWord(english);
 
 		BaiduTransResultBean baiduTrans = gson.fromJson(result, BaiduTransResultBean.class);
-		
-		List<BaiduEnToZnBean> transResultList = baiduTrans.getTransResult();
+		//一般只有一个元素
+		List<BaiduEnToZnBean> transResultList = baiduTrans.getTrans_result();
 
 		//保存汉字
-		StringBuilder sb = new StringBuilder();
+		StringBuilder chinese = new StringBuilder();
 		for (BaiduEnToZnBean transResult : transResultList)
-			sb.append(transResult.getDst());
+			chinese.append(transResult.getDst());
 
-		return sb.toString();
+		return chinese.toString();
 	}
 	
 	/**
