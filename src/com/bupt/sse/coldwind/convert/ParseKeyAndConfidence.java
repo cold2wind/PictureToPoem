@@ -33,6 +33,8 @@ public class ParseKeyAndConfidence {
 	 * @return
 	 */
 	public String getPoem(String json) {
+		if(json == null) return "特征未提取到！";
+		
 		//英文的键
 		Map<String, String> enTags = getEnTagMap(json);
 		//中文的键
