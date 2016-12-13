@@ -41,7 +41,7 @@ public class ParseKeyAndConfidence {
 		Map<String, String> zhTags = transEnTags(enTags);
 		
 		for (String str : zhTags.keySet()) {
-			System.out.println("Result key: " + str + " value:" + zhTags.get(str));
+			System.out.println("key: " + str + "=====" + "value:" + zhTags.get(str));
 		}
 			
 		return analyze(zhTags);

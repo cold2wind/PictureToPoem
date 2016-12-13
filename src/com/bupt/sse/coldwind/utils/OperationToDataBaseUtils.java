@@ -2,7 +2,8 @@ package com.bupt.sse.coldwind.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,8 +20,8 @@ public class OperationToDataBaseUtils {
         //存储数据库文件
         Map<String, PoemBean> keyAndPoem = new HashMap<String, PoemBean>();
         try {
-			FileReader fr = new FileReader(file);
-            BufferedReader br = new BufferedReader(fr);
+			InputStreamReader isr = new InputStreamReader(new FileInputStream(file),"UTF-8");
+            BufferedReader br = new BufferedReader(isr);
 
             String str = null;
             while ((str = br.readLine()) != null) {
@@ -33,7 +34,7 @@ public class OperationToDataBaseUtils {
                 }
             }
             
-            fr.close();
+            br.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
